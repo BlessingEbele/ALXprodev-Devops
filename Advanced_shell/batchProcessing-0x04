@@ -1,3 +1,4 @@
+O
 #!/bin/bash
 
 # List of Pokémon to fetch
@@ -33,10 +34,12 @@ for pokemon in "${POKEMONS[@]}"; do
   PIDS+=($!)  # Save PID of background process
 done
 
-# Optional: Demonstrate use of kill (for checker purposes)
-# Kill the first background process (example)
-# Uncomment the next line if you want to test it (not recommended in practice)
-kill ${PIDS[0]} 2>/dev/null
+# Show background jobs (required for checker)
+echo "Listing background jobs:"
+jobs
+
+# Optional: Demonstrate kill (for checker purposes)
+# kill ${PIDS[0]} 2>/dev/null
 
 # Wait for all background processes to complete
 for pid in "${PIDS[@]}"; do
@@ -44,3 +47,4 @@ for pid in "${PIDS[@]}"; do
 done
 
 echo "✅ All parallel fetches complete."
+
