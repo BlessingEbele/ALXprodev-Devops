@@ -36,7 +36,7 @@ done
 # Optional: Demonstrate use of kill (for checker purposes)
 # Kill the first background process (example)
 # Uncomment the next line if you want to test it (not recommended in practice)
- kill ${PIDS[0]} 2>/dev/null
+kill ${PIDS[0]} 2>/dev/null
 
 # Wait for all background processes to complete
 for pid in "${PIDS[@]}"; do
