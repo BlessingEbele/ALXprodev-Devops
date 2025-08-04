@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# List of Pokémon to fetch
+POKEMONS=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
+
+# Create directory to store JSON files
+OUTPUT_DIR="pokemon_data"
+mkdir -p "$OUTPUT_DIR"
+
+# Loop through each Pokémon
+for pokemon in "${POKEMONS[@]}"; do
+  echo "Fetching data for $pokemon..."
+  RESPONSE=$(curl -s -f "https://pokeapi.co/api/v2/pokemon/$pokemon" -o "$OUTPUT_DIR/${pokemon}.json" 2>&1)
+
+  # Check if the curl command was successful
+  if [ $? -eq 0 ]; then
+    echo "Saved data to $OUTPUT_DIR/${pokemon}.json ✅"
+  else
+    echo "❌ Failed to fetch $pokemon: $RESPONSE" >> errors.txt
+  fi
+
+  # Add delay to handle rate-limiting
+  sleep 1
+done
